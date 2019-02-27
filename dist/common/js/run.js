@@ -18,18 +18,24 @@
 
     // 機能実行
     $(function () {
+        $('.js-carousel.fade').setCarousel({
+            animationType: 'fade',
+            duration: 600,
+            playInterval: 2500,
+            autoPlay: true
+        });
         $('.js-carousel.col1').setCarousel({
             animationType: 'slide',
-            duration: 300,
-            // playInterval: 500,
+            duration: 600,
+            playInterval: 5000,
             column: 1,
             spColumn: 2,
             autoPlay: true
         });
         $('.js-carousel.col2').setCarousel({
             animationType: 'slide',
-            duration: 300,
-            // playInterval: 500,
+            duration: 600,
+            playInterval: 4000,
             column: 2,
             spColumn: 1,
             autoPlay: true,
@@ -39,11 +45,11 @@
         });
         $('.js-carousel.col3').setCarousel({
             animationType: 'slide',
-            duration: 300,
-            // playInterval: 500,
+            duration: 600,
+            playInterval: 2000,
             column: 3,
             spColumn: 2,
-            // colMargin: 15,
+            colMargin: 15,
             autoPlay: true
         });
     });
@@ -417,7 +423,6 @@
          * @return {void}
          */
         targetSlide: function (e) {
-            let self = this;
             let targetNum = $(e.target).find('.indicator-index').attr('data-current');
 
             if (this.isSliding) {
@@ -572,6 +577,10 @@
                 self.transitionHandler();
             });
 
+            this.$item.on(TRANSITIONEND, function () {
+                self.isSliding = false;
+            })
+
             this.$pause.on('click', function (e) {
                 if (e.target.classList.contains('carousel__pause')) {
                     self.stopAutoPlay();
@@ -646,7 +655,6 @@
                     return;
                 }
                 this.isSliding = false;
-
             }
         },
 
