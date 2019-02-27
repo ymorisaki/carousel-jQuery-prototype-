@@ -1,0 +1,102 @@
+@charset "utf-8";
+
+//* ----------------------------------------------------------------
+//    Color
+//----------------------------------------------------------------- *
+
+$color-font-base : #333;
+$color-transparent : rgba(0,0,0,0);
+$color-label : #f0f0f0;
+$color-theme: #a03223;
+
+//* ----------------------------------------------------------------
+//    Font
+//----------------------------------------------------------------- *
+
+$YuGothic: 'Yu Gothic Medium';
+$YuGothicLight: 'Yu Gothic Light';
+$HiraginoKakuGo: 'Hiragino Kaku Gothic ProN';
+$Meiryo: Meiryo;
+$MSPGothic: 'ＭＳ Ｐゴシック';
+$font-family: $YuGothic, $Meiryo, $MSPGothic, $HiraginoKakuGo, sans-serif;
+$font-family-light: $YuGothicLight, $YuGothic, $Meiryo, $MSPGothic, $HiraginoKakuGo, sans-serif;
+$font-size: 16px;
+$font-size-sp: 14px;
+$line-height: 1.6;
+
+
+//* ----------------------------------------------------------------
+//    Media Queries
+//----------------------------------------------------------------- *
+
+$mq-width-s: 767px;
+$mq-width-l: 1200px;
+
+
+//* ----------------------------------------------------------------
+//    Width
+//----------------------------------------------------------------- *
+
+$width-small: $mq-width-s;
+$width-wide: $mq-width-l;
+
+
+// ------------------------------------
+// Line Heights
+// ------------------------------------
+
+// 通常
+$LINE_HEIGHT: 1.5;
+
+// 本文
+$LINE_HEIGHT_TEXT: 1.8;
+
+// 見出し
+$LINE_HEIGHT_HEADING: 1.5;
+
+// 見出しレベル1
+$LINE_HEIGHT_HEADING_01: 1.4;
+
+
+// ------------------------------------
+// Widths
+// ------------------------------------
+
+// ブレークポイント
+$WIDTH_BREAK_POINT: 768px;
+
+// 左右スペース
+$WIDTH_SIDE_SPACE: 14px;
+
+// コンテンツ内左右スペース
+$WIDTH_SIDE_SPACE_INNER: 50px;
+
+// コンテンツ幅
+$WIDTH_CONTENTS: 1200px;
+
+// ------------------------------------
+// Media Queries
+// ------------------------------------
+
+// 巨大端末 時指定
+$MEDIA_QUERIES_LARGE: "screen and (min-width: #{$WIDTH_BREAK_POINT + 1000px})";
+
+// PC 時指定
+$MEDIA_QUERIES: "screen and (min-width: #{$WIDTH_BREAK_POINT})";
+
+// Tablet 時指定
+$MEDIA_QUERIES_TAB: "screen and (max-width: #{($WIDTH_BREAK_POINT + 240px)})";
+
+// SP 時指定
+$MEDIA_QUERIES_SP: "screen and (max-width: #{($WIDTH_BREAK_POINT - 1)})";
+
+
+// ------------------------------------
+// Colors
+// ------------------------------------
+
+// ------------------------------------
+// transition
+// ------------------------------------
+
+$TRANSITION: .2s;
