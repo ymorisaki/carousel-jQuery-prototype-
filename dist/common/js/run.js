@@ -4,6 +4,7 @@
     const $win = $(win);
     const TRANSITIONEND = 'transitionend';
     const FOCUSABLE = 'a, area, input, button, select, option, textarea, output, summary, video, audio, object, embed, iframe';
+    const UA = navigator.userAgent.toLowerCase();
     const setOptions = function (target, options) {
         let o;
 
@@ -73,9 +74,10 @@
             this.setInitItems();
             this.setController();
             this.changeTabindex();
-            this.resizeHandler();
             this.clickHandler();
+            this.resizeHandler();
             this.hoverHandler();
+            this.keyHandler();
 
             if (this.swipe) {
                 this.swipeHandler();
@@ -539,6 +541,7 @@
 
             this.$prev.on('click', function () {
                 self.prevSlide();
+                self.$itemFocus.attr('tabindex', -1);
                 self.changeTabindex();
                 if (self.autoPlay && self.isAutoPlay) {
                     self.resetAutoPlayTime();
@@ -575,6 +578,39 @@
         },
 
         /**
+         * リサイズの際の処理
+         * @return {void}
+         */
+        resizeHandler: function () {
+            let self = this;
+            let timeoutId = null;
+            let windowWidth = null;
+
+            $win.on('resize', function () {
+                // スライドタイプの場合リサイズ中に自動再生をされるとオワル
+                if (self.animationType === 'slide') {
+                    self.resetAutoPlayTime();
+                }
+
+                if (timeoutId) {
+                    return;
+                }
+
+                timeoutId = setTimeout(function () {
+                    timeoutId = 0;
+                    windowWidth = $win.width();
+
+                    if (self.spColumn) {
+                        self.changeBreakPoint(windowWidth);
+                    }
+
+                    self.setColItems();
+                    self.matchHeight();
+                }, self.resizeThreshold);
+            });
+        },
+
+        /**
          * マウスホバー時の処理
          * @return {void}
          */
@@ -594,6 +630,30 @@
                     self.isOnStop = false;
                 }
             });
+        },
+
+        /**
+         * キー操作時の処理
+         * @return {void}
+         */
+        keyHandler: function () {
+            let self = this;
+            let tabEventCansel = function (e) {
+                if (self.isSliding && self.animationType === 'slide' && e.key === 'Tab') {
+                    e.preventDefault();
+                }
+            };
+
+            this.$next.on('keydown', tabEventCansel);
+            this.$prev.on('keydown', tabEventCansel);
+
+            if (UA.indexOf('edge') !== -1) {
+                this.$item.on('keydown', tabEventCansel);
+            }
+
+            if (UA.indexOf('trident/7') !== -1) {
+                this.$item.on('keydown', tabEventCansel);
+            }
         },
 
         /**
@@ -656,39 +716,6 @@
                 }
                 this.isSliding = false;
             }
-        },
-
-        /**
-         * リサイズの際の処理
-         * @return {void}
-         */
-        resizeHandler: function () {
-            let self = this;
-            let timeoutId = null;
-            let windowWidth = null;
-
-            $win.on('resize', function () {
-                // スライドタイプの場合リサイズ中に自動再生をされるとオワル
-                if (self.animationType === 'slide') {
-                    self.resetAutoPlayTime();
-                }
-
-                if (timeoutId) {
-                    return;
-                }
-
-                timeoutId = setTimeout(function () {
-                    timeoutId = 0;
-                    windowWidth = $win.width();
-
-                    if (self.spColumn) {
-                        self.changeBreakPoint(windowWidth);
-                    }
-
-                    self.setColItems();
-                    self.matchHeight();
-                }, self.resizeThreshold);
-            });
         },
 
         /**
