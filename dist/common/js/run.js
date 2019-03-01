@@ -255,6 +255,7 @@
 
             this.isSliding = true;
             this.isCurrentNum++;
+            this.resizeBeforeWidth = $win.width();
 
             if (this.animationType === 'slide') {
                 this.itemWidth = this.$item.outerWidth(true);
@@ -323,6 +324,7 @@
 
             this.isSliding = true;
             this.isCurrentNum--;
+            this.resizeBeforeWidth = $win.width();
 
             if (this.animationType === 'slide') {
                 this.itemWidth = this.$item.outerWidth(true);
@@ -397,6 +399,7 @@
             }
 
             this.isSliding = true;
+            this.resizeBeforeWidth = $win.width();
 
             this.indicatorUpdate(targetNum - 1);
             this.isCurrentNum = parseInt(targetNum, 10);
@@ -698,10 +701,14 @@
          */
         transitionHandler: function () {
             if (this.animationType === 'slide') {
+                this.resizeAfterWidth = $win.width();
                 // 現在のleft位置を数値でキャッシュ
                 this.nowPosition = parseInt(this.$slideInner.css('left').match(/(\d+)/)[0], 10);
-                this.setColItems();
-                $win.trigger('resize');
+
+                if (this.resizeBeforeWidth !== this.resizeAfterWidth) {
+                    this.setColItems();
+                    $win.trigger('resize');
+                }
 
                 if (this.isCurrentNum > this.itemLength) {
                     this.nextInfiniteLoop();
@@ -915,6 +922,8 @@
                 onStopPlay: o.onStopPlay,
                 easing: o.easing,
                 autoPlayId: null,
+                resizeBeforeWidth: null,
+                resizeAfterWidth: null,
                 dots: o.dots,
                 isAutoPlay: false,
                 isSliding: false,
