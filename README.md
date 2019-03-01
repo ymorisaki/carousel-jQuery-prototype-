@@ -5,15 +5,6 @@
 セマンティクス上に問題がなければ、それぞれ任意のHTML要素を使用できます。
 class名はオプションで変更することが可能です。
 
-.carousel（任意のclass名を設定してください。ここがrootになります。）
-　.carousel__slide-wrap
-　　.carousel__slide-inner
-　　　.carousel__wrap
-　　　　.carousel__item
-　　　　　.任意の子要素
-　　　　.carousel__item
-　　　　　.任意の子要素
-
 ### script要素で以下のように記述をします。
 #### デフォルト値で実行
 $('rootになる任意のclass名').setCarousel();
