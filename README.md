@@ -21,15 +21,23 @@ $('rootになる任意のclass名').setCarousel({
 });
 ```
 
+#### マークアップ
 ```HTML
-.carousel（任意のclass名を設定してください。ここがrootになります。）
-　.carousel__slide-wrap
-　　.carousel__slide-inner
-　　　.carousel__wrap
-　　　　.carousel__item
-　　　　　.任意の子要素
-　　　　.carousel__item
-　　　　　.任意の子要素
+<div class="carousel（任意のclass名を設定。ここがrootになる）">
+  <div class="carousel__slide-wrap">
+    <div class="carousel__slide-inner">
+      <div class="carousel__wrap">
+        <div class="carousel__item">
+          <p>任意の子要素</p>
+        </div><!-- /.carousel__item -->
+        <div class="carousel__item">
+          <p>任意の子要素</p>
+        </div><!-- /.carousel__item -->
+      </div><!-- /.carousel__slide-wrap -->
+    </div><!-- /.carousel__slide-inner -->
+  </div><!-- /.carousel__slide-wrap -->
+</div><!-- /.carousel -->
+
 ```
 
 ## オプション
